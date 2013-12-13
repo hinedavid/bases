@@ -50,37 +50,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgregarMedico.Designer.cs">
+      <DependentUpon>AgregarMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="auditarConsultas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="auditarConsultas.Designer.cs">
+      <DependentUpon>auditarConsultas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="aumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="aumento.Designer.cs">
+      <DependentUpon>aumento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Consultarsubordinados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultarsubordinados.Designer.cs">
+      <DependentUpon>Consultarsubordinados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consultartratamientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consultartratamientos.Designer.cs">
+      <DependentUpon>Consultartratamientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="inicio.Designer.cs">
+      <DependentUpon>inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form3.cs">
+    <Compile Include="consulta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="consulta.Designer.cs">
+      <DependentUpon>consulta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form4.cs">
+    <Compile Include="tratamiento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="tratamiento.Designer.cs">
+      <DependentUpon>tratamiento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form5.cs">
+    <Compile Include="tratamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form5.Designer.cs">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <Compile Include="tratamento.Designer.cs">
+      <DependentUpon>tratamento.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs" />
     <Compile Include="nueva consulta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,20 +120,35 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AgregarMedico.resx">
+      <DependentUpon>AgregarMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="auditarConsultas.resx">
+      <DependentUpon>auditarConsultas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="aumento.resx">
+      <DependentUpon>aumento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultarsubordinados.resx">
+      <DependentUpon>Consultarsubordinados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Consultartratamientos.resx">
+      <DependentUpon>Consultartratamientos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="inicio.resx">
+      <DependentUpon>inicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="consulta.resx">
+      <DependentUpon>consulta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="tratamiento.resx">
+      <DependentUpon>tratamiento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form5.resx">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <EmbeddedResource Include="tratamento.resx">
+      <DependentUpon>tratamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="nueva consulta.resx">
       <DependentUpon>nueva consulta.cs</DependentUpon>

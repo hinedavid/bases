@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txt_idpaciente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_aceptar = new System.Windows.Forms.Button();
             this.btn_cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txt_idpaciente
             // 
-            this.textBox1.Location = new System.Drawing.Point(174, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
-            this.textBox1.TabIndex = 0;
+            this.txt_idpaciente.Location = new System.Drawing.Point(174, 29);
+            this.txt_idpaciente.Name = "txt_idpaciente";
+            this.txt_idpaciente.Size = new System.Drawing.Size(180, 20);
+            this.txt_idpaciente.TabIndex = 0;
             // 
             // label1
             // 
@@ -78,9 +78,9 @@
             this.Controls.Add(this.btn_cancelar);
             this.Controls.Add(this.btn_aceptar);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_idpaciente);
             this.Name = "nuevaconsulta";
-            this.Text = "Solicitar Nueva  Consulta";
+            this.Text = "+";
             this.Load += new System.EventHandler(this.nuevaconsulta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -89,7 +89,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txt_idpaciente;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_aceptar;
         private System.Windows.Forms.Button btn_cancelar;

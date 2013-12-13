@@ -2,26 +2,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Oracle.DataAccess.Client;
+using System.Data;
+using System.Windows.Forms;
 
 
      public  class Conexion
     {
-        private  static string user = "q";
-        private  static string clave;
-
-        public Conexion()
-        {}
-
-        public Conexion(string u, string p) {
-
-            user = u;
-            clave = p;
-        }
         
-         public static string get_user(){
+        private static bool success;
+        private static OracleCommand cmd = new OracleCommand(); 
 
-             return user;
+
+        //constructor de la clase conexión
+        public Conexion()
+        {
+        
+                   //String de conexiòn
+            String connString ="User id=system;Password=hine;Data Source=orcl;";
+            OracleConnection conn = new OracleConnection(connString);
+            //cmd = new OracleCommand();
+            cmd.Connection = conn;
+            
+            //manejo de excepciones
+
+             try
+            {
+                
+                //intenta abrir la base de datos
+                success = true;
+                conn.Open();
+                
+                
+            }
+
+            catch
+            {
+                success = false;
+                MessageBox.Show("Imposible acceder a la base de datos");
+            } 
+           
+            
+            
+        }
+
+        
+        
+
+         //retorna la la condiciòn de apertura de la base
+         public static bool Success()
+         {
+
+             return success;
          }
+
+         public  static OracleCommand get_cmd()
+         {
+
+             return cmd;
+         }
+        
         
 
         
