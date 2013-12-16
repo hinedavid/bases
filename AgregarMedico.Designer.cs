@@ -35,15 +35,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_id = new System.Windows.Forms.TextBox();
-            this.txt_tipoid = new System.Windows.Forms.TextBox();
             this.txt_nombre = new System.Windows.Forms.TextBox();
-            this.txt_horario = new System.Windows.Forms.TextBox();
             this.txt_codsup = new System.Windows.Forms.TextBox();
             this.txt_tipo = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_codicoM = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Bx_tipo_id_sup = new System.Windows.Forms.ComboBox();
+            this.lbl_tipo_id_sup = new System.Windows.Forms.Label();
+            this.lbl_salario = new System.Windows.Forms.Label();
+            this.txt_salario = new System.Windows.Forms.TextBox();
+            this.cmb_horario = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -85,16 +89,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 236);
+            this.label5.Location = new System.Drawing.Point(26, 236);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 13);
+            this.label5.Size = new System.Drawing.Size(123, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Código Supervisor";
+            this.label5.Text = "Identificación Supervisor";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 277);
+            this.label6.Location = new System.Drawing.Point(29, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(28, 13);
             this.label6.TabIndex = 5;
@@ -102,46 +107,31 @@
             // 
             // txt_id
             // 
-            this.txt_id.Location = new System.Drawing.Point(130, 30);
+            this.txt_id.Location = new System.Drawing.Point(155, 30);
             this.txt_id.MaxLength = 9;
             this.txt_id.Name = "txt_id";
             this.txt_id.Size = new System.Drawing.Size(100, 20);
             this.txt_id.TabIndex = 6;
             // 
-            // txt_tipoid
-            // 
-            this.txt_tipoid.Location = new System.Drawing.Point(130, 66);
-            this.txt_tipoid.MaxLength = 3;
-            this.txt_tipoid.Name = "txt_tipoid";
-            this.txt_tipoid.Size = new System.Drawing.Size(100, 20);
-            this.txt_tipoid.TabIndex = 7;
-            // 
             // txt_nombre
             // 
-            this.txt_nombre.Location = new System.Drawing.Point(130, 106);
+            this.txt_nombre.Location = new System.Drawing.Point(155, 111);
             this.txt_nombre.MaxLength = 60;
             this.txt_nombre.Name = "txt_nombre";
             this.txt_nombre.Size = new System.Drawing.Size(238, 20);
             this.txt_nombre.TabIndex = 8;
             // 
-            // txt_horario
-            // 
-            this.txt_horario.Location = new System.Drawing.Point(130, 188);
-            this.txt_horario.Name = "txt_horario";
-            this.txt_horario.Size = new System.Drawing.Size(100, 20);
-            this.txt_horario.TabIndex = 9;
-            // 
             // txt_codsup
             // 
-            this.txt_codsup.Location = new System.Drawing.Point(130, 229);
-            this.txt_codsup.MaxLength = 8;
+            this.txt_codsup.Location = new System.Drawing.Point(155, 229);
+            this.txt_codsup.MaxLength = 9;
             this.txt_codsup.Name = "txt_codsup";
             this.txt_codsup.Size = new System.Drawing.Size(100, 20);
             this.txt_codsup.TabIndex = 10;
             // 
             // txt_tipo
             // 
-            this.txt_tipo.Location = new System.Drawing.Point(130, 270);
+            this.txt_tipo.Location = new System.Drawing.Point(155, 322);
             this.txt_tipo.MaxLength = 10;
             this.txt_tipo.Name = "txt_tipo";
             this.txt_tipo.Size = new System.Drawing.Size(100, 20);
@@ -149,7 +139,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(242, 315);
+            this.button1.Location = new System.Drawing.Point(240, 411);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -159,7 +149,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(335, 315);
+            this.button2.Location = new System.Drawing.Point(334, 411);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -178,25 +168,97 @@
             // 
             // txt_codicoM
             // 
-            this.txt_codicoM.Location = new System.Drawing.Point(130, 147);
+            this.txt_codicoM.Location = new System.Drawing.Point(155, 147);
             this.txt_codicoM.Name = "txt_codicoM";
             this.txt_codicoM.Size = new System.Drawing.Size(100, 20);
             this.txt_codicoM.TabIndex = 15;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            "ced",
+            "res"});
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "ced",
+            "res"});
+            this.comboBox1.Location = new System.Drawing.Point(155, 74);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.TabIndex = 16;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // Bx_tipo_id_sup
+            // 
+            this.Bx_tipo_id_sup.AutoCompleteCustomSource.AddRange(new string[] {
+            "ced",
+            "res"});
+            this.Bx_tipo_id_sup.FormattingEnabled = true;
+            this.Bx_tipo_id_sup.Items.AddRange(new object[] {
+            "ced",
+            "res"});
+            this.Bx_tipo_id_sup.Location = new System.Drawing.Point(155, 281);
+            this.Bx_tipo_id_sup.Name = "Bx_tipo_id_sup";
+            this.Bx_tipo_id_sup.Size = new System.Drawing.Size(100, 21);
+            this.Bx_tipo_id_sup.TabIndex = 17;
+            // 
+            // lbl_tipo_id_sup
+            // 
+            this.lbl_tipo_id_sup.AutoSize = true;
+            this.lbl_tipo_id_sup.Location = new System.Drawing.Point(29, 288);
+            this.lbl_tipo_id_sup.Name = "lbl_tipo_id_sup";
+            this.lbl_tipo_id_sup.Size = new System.Drawing.Size(92, 13);
+            this.lbl_tipo_id_sup.TabIndex = 18;
+            this.lbl_tipo_id_sup.Text = "tipo_identificación";
+            // 
+            // lbl_salario
+            // 
+            this.lbl_salario.AutoSize = true;
+            this.lbl_salario.Location = new System.Drawing.Point(32, 370);
+            this.lbl_salario.Name = "lbl_salario";
+            this.lbl_salario.Size = new System.Drawing.Size(37, 13);
+            this.lbl_salario.TabIndex = 19;
+            this.lbl_salario.Text = "salario";
+            // 
+            // txt_salario
+            // 
+            this.txt_salario.Location = new System.Drawing.Point(155, 370);
+            this.txt_salario.Name = "txt_salario";
+            this.txt_salario.Size = new System.Drawing.Size(100, 20);
+            this.txt_salario.TabIndex = 20;
+            // 
+            // cmb_horario
+            // 
+            this.cmb_horario.AutoCompleteCustomSource.AddRange(new string[] {
+            "ced",
+            "res"});
+            this.cmb_horario.FormattingEnabled = true;
+            this.cmb_horario.Items.AddRange(new object[] {
+            "Diurno",
+            "Nocturno"});
+            this.cmb_horario.Location = new System.Drawing.Point(155, 192);
+            this.cmb_horario.Name = "cmb_horario";
+            this.cmb_horario.Size = new System.Drawing.Size(100, 21);
+            this.cmb_horario.TabIndex = 21;
             // 
             // AgregarMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 350);
+            this.ClientSize = new System.Drawing.Size(509, 508);
+            this.Controls.Add(this.cmb_horario);
+            this.Controls.Add(this.txt_salario);
+            this.Controls.Add(this.lbl_salario);
+            this.Controls.Add(this.lbl_tipo_id_sup);
+            this.Controls.Add(this.Bx_tipo_id_sup);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txt_codicoM);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txt_tipo);
             this.Controls.Add(this.txt_codsup);
-            this.Controls.Add(this.txt_horario);
             this.Controls.Add(this.txt_nombre);
-            this.Controls.Add(this.txt_tipoid);
             this.Controls.Add(this.txt_id);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -221,14 +283,18 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_id;
-        private System.Windows.Forms.TextBox txt_tipoid;
         private System.Windows.Forms.TextBox txt_nombre;
-        private System.Windows.Forms.TextBox txt_horario;
         private System.Windows.Forms.TextBox txt_codsup;
         private System.Windows.Forms.TextBox txt_tipo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txt_codicoM;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Bx_tipo_id_sup;
+        private System.Windows.Forms.Label lbl_tipo_id_sup;
+        private System.Windows.Forms.Label lbl_salario;
+        private System.Windows.Forms.TextBox txt_salario;
+        private System.Windows.Forms.ComboBox cmb_horario;
     }
 }

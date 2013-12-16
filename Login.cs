@@ -28,35 +28,31 @@ using System.Windows.Forms;
             {
                 
 
-                //intenta abrir la base de datos
-                //conn.Open();
-                //String query = "select * from userdatabase2013.USUARIO";
-                //String query = "select usuario,passwd from edusdb.USUARIO Where usuario='" + user + "'And passwd='" + pass + "'";
-                String query = "select usuario,passwd,tipo from edusdb.USUARIO Where usuario='" + @user + "'And passwd='" + @pass + "'";
+                String query = "select usuario,passwd,tipo from scott.USUARIO Where usuario=  :user1 And passwd= :pass1 ";
                 cmd.CommandText = query;
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add(@user, Oracle.DataAccess.Client.OracleDbType.NVarchar2, 9);
-                cmd.Parameters[0].Value = user;
-                cmd.Parameters.Add(@pass, Oracle.DataAccess.Client.OracleDbType.NVarchar2, 9);
-                cmd.Parameters[1].Value = pass;
-
-
+                cmd.Parameters.Add(":user1", user);
+                cmd.Parameters.Add("pass1", pass);
+               
                 //****Ejecutamos la consulta mediante un DataReader de Oracle
                 OracleDataReader reader = cmd.ExecuteReader();
-                //***si se quiere en un dataset
+               
                 //Al adaptador hay que pasarle el string SQL y la Conexión
                 OracleDataAdapter adapter = new OracleDataAdapter(cmd);
                 DataSet set = new DataSet();
-                adapter.Fill(set, "usuario");  //llena el conjunto con la respuesta de la consulta
+                
+                set.Tables.Add("Tabla");
+                adapter.Fill(set, "tabla");  //llena el conjunto con la respuesta de la consulta
                 //this.dataGridView1.DataSource = set;
                 // this.dataGridView1.DataMember = "usuario";
                 //this.dataGridView1.Refresh();
-                DataRow DR;
-                DR = set.Tables["usuario"].Rows[0];
-                if ((user == DR["usuario"].ToString()) && (pass == DR["passwd"].ToString()))
+               DataRow DR;
+                DR = set.Tables["tabla"].Rows[0];
+                if ((user == DR[0].ToString()) && (pass == DR[1].ToString()))
                 {
                     tipo = DR["tipo"].ToString();
                     success = true;
+        
                 }
                 else { MessageBox.Show("Usuario o Contraseña incorrecta no entro al if"); }
 
@@ -64,7 +60,7 @@ using System.Windows.Forms;
 
 
                 //conn.Close();
-
+                                                                                                                                    
             }
 
             catch

@@ -49,6 +49,8 @@ namespace WindowsFormsApplication1
                 Form1 F1 = new Form1(); 
                 F1.Show();
                 this.Hide();
+                //se cierra la conexión
+                c.Close();
                 } 
 
             }

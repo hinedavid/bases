@@ -61,9 +61,10 @@ namespace WindowsFormsApplication1
 
         private void btn_nueva_consulta_Click(object sender, EventArgs e)
         {
+            nuevaconsulta snc = new nuevaconsulta();
             snc.Show();
-            //this.Hide();
-           // Conexion c = new ();
+            
+            
             
         }
 

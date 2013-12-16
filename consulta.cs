@@ -15,6 +15,8 @@ namespace WindowsFormsApplication1
         string tipo;
         string cod_medico;
         string cedula;
+        string tipo_ids;
+
         public consulta(string id_paciente)
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            tratamento F5 = new tratamento(cedula,tipo,cod_medico);
+            tratamento F5 = new tratamento(cedula,tipo,Login.get_user(),tipo_ids);
             F5.Show();
 
         }
@@ -74,13 +76,13 @@ namespace WindowsFormsApplication1
 
         private void consultas(string id_paciente,string id_medico)
         {
-        
 
+            
              //manejo de excepciones
             try {
                 //intenta abrir la base de datos
-                
-                String query = "select codigo_medico,nombre_paciente,fdenac_paciente,tipo_identificacion from edusdb.Medico,edusdb.Paciente where num_identificacion_paciente='" + id_paciente + "'And identificacion='"+ id_medico +"'";
+                Conexion c = new Conexion();
+                String query = "select codigo_medico,tipo_id,nombre_paciente,fdenac_paciente,tipo_identificacion from scott.Medico,scott.Paciente where num_identificacion_paciente='" + id_paciente + "'And identificacion='" + id_medico + "'";
                 Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
                 
@@ -97,21 +99,26 @@ namespace WindowsFormsApplication1
 
                      lbl_codigo_medico.Text = reader[0].ToString();
                      cod_medico = reader[0].ToString();
-                     lbl_nombre_paciente.Text = reader[1].ToString();
+                     tipo_ids = reader[1].ToString();
+                     lbl_nombre_paciente.Text = reader[2].ToString();
                      DateTime FecActual = DateTime.Now;                    
-                     DateTime FecPas = Convert.ToDateTime(reader[2].ToString());
+                     DateTime FecPas = Convert.ToDateTime(reader[3].ToString());
                      lbl_edad.Text = Convert.ToString(FecActual.Year - FecPas.Year);
-                     tipo = reader[3].ToString();
+                     tipo = reader[4].ToString();
                               
                      //Conexion c = new Conexion(DR["usuario"].ToString(), DR["passwd"].ToString());
                      DataSet set = new DataSet();
                      set.Tables.Add("Tabla");
                      adapter.Fill(set, "Tabla");  //llena el conjunto con la respuesta de la consulta
-                                                       
+                     c.Close();                                  
  
         
-    }
-    else {MessageBox.Show("no hay consultas"); }
+                 }
+                 else 
+                 {
+                    MessageBox.Show("no hay consultas"); 
+                    c.Close();
+                 }
 
     //Nos acordamos de cerrar la conexión en el caso de que todavía esté abierta
     
@@ -134,16 +141,17 @@ namespace WindowsFormsApplication1
         {
             string fecha = DateTime.Now.Day.ToString() + "/" + DateTime.Now.Month.ToString() + "/" + DateTime.Now.Year.ToString();
             string hora = DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString();
-            
+            //abre la conexiòn
+            Conexion c = new Conexion();
 
             try{                
-                string insertar = "Insert into edusdb.Consulta(fecha_consulta,hora_consulta) values('"+ fecha +"','"+hora+"')";
+                string insertar = "Insert into scott.Consulta(fecha_consulta,hora_consulta) values('"+ fecha +"','"+hora+"')";
                 Conexion.get_cmd().CommandText = insertar;
                 Conexion.get_cmd().CommandType = CommandType.Text;
                 Conexion.get_cmd().ExecuteNonQuery();
                // MessageBox.Show("insertado correctamente");
 
-                insertar = "Insert into edusdb.diagnostico (descripcion_diagnostico,fecha) values('" + txt_descripcion.Text + "','" + fecha + "')";
+                insertar = "Insert into scott.diagnostico (descripcion_diagnostico,fecha) values('" + txt_descripcion.Text + "','" + fecha + "')";
                 Conexion.get_cmd().CommandText = insertar;
                 Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -162,7 +170,7 @@ namespace WindowsFormsApplication1
                 //intenta abrir la base de datos
                 
                 //String query = "select * from userdatabase2013.USUARIO";
-                         String query = "select MAX(codigo_de_consulta), MAX(codigo_diagnostico) from edusdb.consulta,edusdb.diagnostico ";
+                         String query = "select MAX(codigo_consulta), MAX(codigo_diagnostico) from scott.consulta,scott.diagnostico ";
                     Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
                 
@@ -181,20 +189,22 @@ namespace WindowsFormsApplication1
                    
                     // MessageBox.Show("codigos consulta y diagnostico :"+ cod_consulta +","+cod_diagnostico);
 
-                     insertar = "Insert into edusdb.genera (codigo_diagnostico,codigo_consulta) values('" + cod_diagnostico  + "','" + cod_consulta + "')";
+                     insertar = "Insert into scott.genera (codigo_diagnostico,codigo_consulta) values('" + cod_diagnostico  + "','" + cod_consulta + "')";
                      Conexion.get_cmd().CommandText = insertar;
                      Conexion.get_cmd().CommandType = CommandType.Text;
                      
                      try {
                          Conexion.get_cmd().ExecuteNonQuery();
                         // MessageBox.Show("insertado correctamente en la tabla genera");
+                         //cierra la conexiòn
+                         
                      }
 
                      catch {             
                         MessageBox.Show("soy el catch");
                     }
 
-                     insertar = "Insert into edusdb.participa (num_identificacion_paciente,tipo_identificacion,codigo_de_consulta,codigo_medico) values('" + cedula + "','" + tipo + "','" + cod_consulta + "','" + cod_medico + "')";
+                     insertar = "Insert into scott.participa (num_identificacion_paciente,tipo_identificacion,codigo_consulta,identificacion,tipo_id) values('" + cedula + "','" + tipo + "','" + cod_consulta + "','" + Login.get_user() + "','" + tipo_ids + "')";
                      Conexion.get_cmd().CommandText = insertar;
                      Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -202,11 +212,13 @@ namespace WindowsFormsApplication1
                      {
                          Conexion.get_cmd().ExecuteNonQuery();
                          //MessageBox.Show("insertado correctamente en la tabla participa");
+                         c.Close();
                      }
 
                      catch
                      {
                          MessageBox.Show("soy el catch de participa");
+                         c.Close();
                      }
           
     }

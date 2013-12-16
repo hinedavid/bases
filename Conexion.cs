@@ -11,16 +11,16 @@ using System.Windows.Forms;
     {
         
         private static bool success;
-        private static OracleCommand cmd = new OracleCommand(); 
-
+        private static OracleCommand cmd = new OracleCommand();
+        OracleConnection conn;
 
         //constructor de la clase conexión
         public Conexion()
         {
         
                    //String de conexiòn
-            String connString ="User id=system;Password=hine;Data Source=orcl;";
-            OracleConnection conn = new OracleConnection(connString);
+            String connString ="User id=scott;Password=oracle;Data Source=orcl;";
+            conn = new OracleConnection(connString);
             //cmd = new OracleCommand();
             cmd.Connection = conn;
             
@@ -30,9 +30,8 @@ using System.Windows.Forms;
             {
                 
                 //intenta abrir la base de datos
-                success = true;
                 conn.Open();
-                
+                success = true;
                 
             }
 
@@ -61,8 +60,13 @@ using System.Windows.Forms;
 
              return cmd;
          }
-        
-        
+
+         public void Close()
+         {
+
+             conn.Close();
+         }
+
 
         
     }

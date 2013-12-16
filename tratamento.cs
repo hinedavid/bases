@@ -14,15 +14,17 @@ namespace WindowsFormsApplication1
     {
         string cedula;
         string tipo;
-        string cod_medico;
-        public tratamento(string cedula1, string tipo1,string cod_medico1)
+        string cedulaMed;
+        string tipomed;
+        public tratamento(string cedula1, string tipo1,string cedulaM,string tipoM)
         {
             InitializeComponent();
             cedula = cedula1;
             tipo = tipo1;
-            cod_medico = cod_medico1;
-            lbl_codigo_medico.Text = cod_medico1;
+            cedulaMed = cedulaM;
+            lbl_codigo_medico.Text = cedulaM;
             lbl_asegurado.Text = cedula1;
+            tipomed = tipoM;
         }
 
         private void Form5_Load(object sender, EventArgs e)
@@ -61,7 +63,9 @@ namespace WindowsFormsApplication1
 
         private void btn_aceptar_Click(object sender, EventArgs e)
         {
-            string insertar = "Insert into edusdb.tratamiento (descripcion_tratamiento) values('" + txt_descripcion.Text + "')";
+            //abrir conexión
+            Conexion c = new Conexion();
+            string insertar = "Insert into scott.tratamiento (descripcion_tratamiento) values('" + txt_descripcion.Text + "')";
             Conexion.get_cmd().CommandText = insertar;
             Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -79,9 +83,9 @@ namespace WindowsFormsApplication1
              try {
                 //intenta abrir la base de datos
                 
-                //String query = "select * from userdatabase2013.USUARIO";
-                         String query = "select MAX(codigo_tratamiento) from edusdb.tratamiento ";
-                    Conexion.get_cmd().CommandText = query;
+                
+                String query = "select MAX(codigo_tratamiento) from scott.tratamiento ";
+                Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
                 
      
@@ -95,7 +99,7 @@ namespace WindowsFormsApplication1
                      string cod_tratamiento = reader[0].ToString();
                      //MessageBox.Show("codigos consulta y diagnostico :"+ cod_consulta +","+cod_diagnostico);
 
-                     insertar = "Insert into edusdb.toma (num_identificacion_paciente,tipo_identificacion,codigo_tratamiento) values('" + cedula + "','" + tipo + "','" + cod_tratamiento + "')";
+                     insertar = "Insert into scott.toma (num_identificacion_paciente,tipo_identificacion,codigo_tratamiento) values('" + cedula + "','" + tipo + "','" + cod_tratamiento + "')";
                      Conexion.get_cmd().CommandText = insertar;
                      Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -110,7 +114,7 @@ namespace WindowsFormsApplication1
                          MessageBox.Show("soy el catch de tratamiento");
                      }
 
-                     insertar = "Insert into edusdb.prescribe (codigo_medico,codigo_tratamiento) values('" + cod_medico + "','" +  cod_tratamiento + "')";
+                     insertar = "Insert into scott.prescribe(identificacion,tipo_id,codigo_tratamiento) values('" + cedulaMed + "','" + tipomed + "','" + cod_tratamiento + "')";
                      Conexion.get_cmd().CommandText = insertar;
                      Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -118,6 +122,7 @@ namespace WindowsFormsApplication1
                      {
                          Conexion.get_cmd().ExecuteNonQuery();
                         // MessageBox.Show("insertado correctamente en la tabla tratamiento");
+                         c.Close();
                      }
 
                      catch

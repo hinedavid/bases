@@ -24,12 +24,13 @@ namespace WindowsFormsApplication1
 
         private void btn_aceptar_Click(object sender, EventArgs e)
         {
+            Conexion c = new Conexion();
              //manejo de excepciones
             try {
                 //intenta abrir la base de datos
                 
                 //String query = "select * from userdatabase2013.USUARIO";
-                String query = "select num_identificacion_paciente,nombre_paciente,nombre_medico,identificacion from ((edusdb.Participa NATURAL JOIN edusdb.CONSULTA) NATURAL JOIN edusdb.Paciente )NATURAL JOIN edusdb.Medico Where codigo_medico='" + txt_codigo_medico.Text + "'And fecha_consulta= '"+ date_consulta.Text +"'";
+                String query = "select num_identificacion_paciente,nombre_paciente,nombre_medico,codigo_medico from ((scott.Participa NATURAL JOIN scott.CONSULTA) NATURAL JOIN scott.Paciente )NATURAL JOIN scott.Medico Where identificacion='" + txt_codigo_medico.Text + "'And fecha_consulta= '"+ date_consulta.Text +"'";
                 Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
      
@@ -58,12 +59,16 @@ namespace WindowsFormsApplication1
                      this.dataGridView1.Columns[3].Visible = false;
                      
                      
-        //F1.Show();
-        //this.Hide();
-       // Conexion c = new Conexion();
+                     //cerrar la conexiòn
+                     c.Close();
         
-    }
-    else {MessageBox.Show("no hay consultas"); }
+              }
+              else 
+              {
+                     MessageBox.Show("no hay consultas");
+                     //cerrar la conexiòn
+                     c.Close();
+              }
 
     //Nos acordamos de cerrar la conexión en el caso de que todavía esté abierta
     
@@ -74,7 +79,9 @@ namespace WindowsFormsApplication1
 
             catch {
                 // c = new Conexion();
-                MessageBox.Show("soy el catch");
+                MessageBox.Show("ha ocurrido un error");
+                //cerrar la conexiòn
+                c.Close();
             }
             
         
@@ -83,6 +90,11 @@ namespace WindowsFormsApplication1
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

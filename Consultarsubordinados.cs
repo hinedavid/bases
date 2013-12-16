@@ -24,13 +24,14 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Conexion c = new Conexion();
             //manejo de excepciones
             try
             {
                 //intenta abrir la base de datos
 
                 //String query = "select * from userdatabase2013.USUARIO";
-                String query = "select identificacion, tipo_idenficacion, codigo_medico, nombre_medico from edusdb.Medico Where codigo_medico_supervisor='" + txt_identificacion.Text + "'";
+                String query = "select identificacion, tipo_id, codigo_medico, nombre_medico from scott.Medico Where id_medico_supervisor='" + txt_identificacion.Text + "'";
                 Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -57,10 +58,12 @@ namespace WindowsFormsApplication1
                     this.dataGridView1.Columns[1].HeaderText = "Tipo Identificación";
                     this.dataGridView1.Columns[2].HeaderText = "Còdigo Mèdico";
                     this.dataGridView1.Columns[3].HeaderText = "Nombre del Mèdico";
-
+                    c.Close();
 
                 }
-                else { MessageBox.Show("no hay consultas"); }
+                else { MessageBox.Show("no hay consultas");
+                c.Close();
+                }
 
                 //Nos acordamos de cerrar la conexión en el caso de que todavía esté abierta
 
@@ -74,6 +77,11 @@ namespace WindowsFormsApplication1
                 // c = new Conexion();
                 MessageBox.Show("soy el catch");
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -23,13 +23,14 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            Conexion c = new Conexion();
             //manejo de excepciones
             try
             {
                 //intenta abrir la base de datos
 
-                //String query = "select * from userdatabase2013.USUARIO";
-                String query = "select codigo_tratamiento,descripcion_tratamiento,codigo_medico,nombre_medico from ( (edusdb.toma NATURAL JOIN edusdb.TRATAMIENTO)NATURAL JOIN edusdb.prescribe)NATURAL JOIN edusdb.Medico Where num_identificacion_paciente='" + txt_identificacion.Text +"'";
+                String query = "select codigo_tratamiento,descripcion_tratamiento,codigo_medico,nombre_medico from ( (scott.toma NATURAL JOIN scott.TRATAMIENTO)NATURAL JOIN scott.prescribe)NATURAL JOIN scott.Medico Where num_identificacion_paciente='" + txt_identificacion.Text +"'";
                 Conexion.get_cmd().CommandText = query;
                 Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -40,12 +41,8 @@ namespace WindowsFormsApplication1
                 OracleDataAdapter adapter = new OracleDataAdapter(Conexion.get_cmd());
 
 
-
-
                 if (reader.Read())
                 {
-                    //    MessageBox.Show("Bien mongolito, hizo la consulta" + reader[0].ToString() + reader[1].ToString() + reader[2].ToString() + reader[3].ToString());
-                    //Conexion c = new Conexion(DR["usuario"].ToString(), DR["passwd"].ToString());
                     DataSet set = new DataSet();
                     set.Tables.Add("Tabla");
                     adapter.Fill(set, "Tabla");  //llena el conjunto con la respuesta de la consulta
@@ -56,15 +53,13 @@ namespace WindowsFormsApplication1
                     this.dataGridView1.Columns[1].HeaderText = "Descripción del Tratamiento";
                     this.dataGridView1.Columns[2].HeaderText = "Còdigo Mèdico";
                     this.dataGridView1.Columns[3].HeaderText = "Nombre del Mèdico";
-
+                    c.Close();
 
                 }
-                else { MessageBox.Show("no hay consultas"); }
-
-                //Nos acordamos de cerrar la conexión en el caso de que todavía esté abierta
-
-
-
+                else {
+                    MessageBox.Show("no hay consultas");
+                    c.Close();
+                }
 
             }
 
@@ -72,12 +67,18 @@ namespace WindowsFormsApplication1
             {
                 // c = new Conexion();
                 MessageBox.Show("soy el catch");
+                c.Close();
             }
         }
 
         private void Consultartratamientos_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

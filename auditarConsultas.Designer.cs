@@ -43,14 +43,14 @@
             this.lbl_codigo_medico.AutoSize = true;
             this.lbl_codigo_medico.Location = new System.Drawing.Point(37, 33);
             this.lbl_codigo_medico.Name = "lbl_codigo_medico";
-            this.lbl_codigo_medico.Size = new System.Drawing.Size(81, 13);
+            this.lbl_codigo_medico.Size = new System.Drawing.Size(111, 13);
             this.lbl_codigo_medico.TabIndex = 0;
-            this.lbl_codigo_medico.Text = "Código Médico:";
+            this.lbl_codigo_medico.Text = "Identificación Médico:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(247, 33);
+            this.label1.Location = new System.Drawing.Point(272, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 1;
@@ -58,14 +58,15 @@
             // 
             // txt_codigo_medico
             // 
-            this.txt_codigo_medico.Location = new System.Drawing.Point(124, 30);
+            this.txt_codigo_medico.Location = new System.Drawing.Point(154, 30);
+            this.txt_codigo_medico.MaxLength = 9;
             this.txt_codigo_medico.Name = "txt_codigo_medico";
             this.txt_codigo_medico.Size = new System.Drawing.Size(100, 20);
             this.txt_codigo_medico.TabIndex = 2;
             // 
             // btn_aceptar
             // 
-            this.btn_aceptar.Location = new System.Drawing.Point(281, 86);
+            this.btn_aceptar.Location = new System.Drawing.Point(312, 86);
             this.btn_aceptar.Name = "btn_aceptar";
             this.btn_aceptar.Size = new System.Drawing.Size(75, 23);
             this.btn_aceptar.TabIndex = 4;
@@ -75,12 +76,13 @@
             // 
             // btn_cancelar
             // 
-            this.btn_cancelar.Location = new System.Drawing.Point(362, 86);
+            this.btn_cancelar.Location = new System.Drawing.Point(393, 86);
             this.btn_cancelar.Name = "btn_cancelar";
             this.btn_cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_cancelar.TabIndex = 5;
             this.btn_cancelar.Text = "Cancelar";
             this.btn_cancelar.UseVisualStyleBackColor = true;
+            this.btn_cancelar.Click += new System.EventHandler(this.btn_cancelar_Click);
             // 
             // dataGridView1
             // 
@@ -96,7 +98,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(40, 129);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(397, 343);
+            this.dataGridView1.Size = new System.Drawing.Size(428, 343);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -104,7 +106,7 @@
             // 
             this.date_consulta.CustomFormat = "";
             this.date_consulta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_consulta.Location = new System.Drawing.Point(337, 30);
+            this.date_consulta.Location = new System.Drawing.Point(368, 33);
             this.date_consulta.Name = "date_consulta";
             this.date_consulta.Size = new System.Drawing.Size(100, 20);
             this.date_consulta.TabIndex = 7;

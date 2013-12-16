@@ -25,8 +25,11 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            String query = "select * from edusdb.PACIENTE Where num_identificacion_paciente = '" + txt_idpaciente.Text+"'";
+            
+            try{
+            //abrir la conexión 
+            Conexion c = new Conexion();
+            String query = "select * from scott.PACIENTE Where num_identificacion_paciente = '" + txt_idpaciente.Text+"'";
             Conexion.get_cmd().CommandText = query;
             Conexion.get_cmd().CommandType = CommandType.Text;
             //Conexion.get_cmd().Parameters.Add("@id_pas", Oracle.DataAccess.Client.OracleDbType.NVarchar2, 9);
@@ -47,15 +50,22 @@ namespace WindowsFormsApplication1
                 consulta f3 = new consulta(txt_idpaciente.Text);
                 f3.Show();
                 this.Hide();
+                c.Close();
             }
             else { MessageBox.Show("no existe paciente"); }
-           
+            }
+            catch { }
 
         }
 
         private void nuevaconsulta_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void btn_cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -19,7 +19,10 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string insertar = "Insert into edusdb.medico (identificacion,tipo_idenficacion,codigo_medico,nombre_medico,horario_medico,codigo_medico_supervisor,tipo_categoria,salario) values('" + txt_id.Text + "','" + txt_tipoid.Text + "','" + txt_codicoM.Text + "','" + txt_nombre.Text + "','" + txt_horario.Text + "','" + txt_codsup.Text + "','" + txt_tipo.Text + "','"+ "700"+ "')";
+            //establece la conexión
+            Conexion c = new Conexion();
+
+            string insertar = "Insert into scott.medico (identificacion,tipo_id,codigo_medico,nombre_medico,horario_medico,id_medico_supervisor,tipo_id_supervisor,tipo_categoria,salario) values('" + txt_id.Text + "','" + comboBox1.SelectedItem + "','" + txt_codicoM.Text + "','" + txt_nombre.Text + "','" + cmb_horario.SelectedItem + "','" + txt_codsup.Text + "','" + Bx_tipo_id_sup.SelectedItem + "','" + txt_tipo.Text + "','"+ txt_salario.Text + "')";
             Conexion.get_cmd().CommandText = insertar;
             Conexion.get_cmd().CommandType = CommandType.Text;
 
@@ -27,6 +30,7 @@ namespace WindowsFormsApplication1
             {
                 Conexion.get_cmd().ExecuteNonQuery();
                 MessageBox.Show("insertado correctamente en la tabla Medico");
+                c.Close();
             }
 
             catch
@@ -41,6 +45,16 @@ namespace WindowsFormsApplication1
         }
 
         private void AgregarMedico_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label5_Click(object sender, EventArgs e)
         {
 
         }
